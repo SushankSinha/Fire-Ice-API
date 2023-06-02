@@ -165,14 +165,14 @@ divBtn.appendChild(btn5);
 let responseData;
 
 async function apiData() {
-  
+
   try {
     let data = await fetch("https://www.anapioficeandfire.com/api/books");
 
-    let res = await data.json()
+    let response = await data.json()
 
-  responseData = res;
-  let defaultRows = res.slice(0, 2)
+  responseData = response;
+  let defaultRows = response.slice(0, 2)
   defaultRows.forEach((defData, idx) => {
     createTable(defData, idx);
   });
