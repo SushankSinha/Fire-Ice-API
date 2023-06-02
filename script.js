@@ -163,13 +163,19 @@ btn5.style.margin = "5px";
 divBtn.appendChild(btn5);
 
 let responseData;
-fetch("https://www.anapioficeandfire.com/api/books").then(data => data.json()).then(res => {
+
+async function apiData() {
+  
+  try {
+    let data = await fetch("https://www.anapioficeandfire.com/api/books");
+
+    let res = await data.json()
+
   responseData = res;
   let defaultRows = res.slice(0, 2)
   defaultRows.forEach((defData, idx) => {
     createTable(defData, idx);
   });
-});
 
 function getFilteredData(startIdx, endIdx) {
   let tableRows = responseData.slice(startIdx,endIdx);
@@ -246,4 +252,11 @@ btn5.addEventListener('click', () => {
   deleteExistingTabledata();
   createTbody();
   getFilteredData(8, 10)
-})
+});
+
+} catch(err) {
+  alert("Error in fetching!"); 
+}
+}
+
+apiData();
